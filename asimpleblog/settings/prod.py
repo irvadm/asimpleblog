@@ -6,7 +6,7 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['asimpleblog.herokuapp.com']
+ALLOWED_HOSTS = ['asimpleblogapp.herokuapp.com']
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
