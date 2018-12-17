@@ -13,8 +13,19 @@
 <body>
   <header>
     <h1>A Very Simple Blog</h1>
+    {% if request.user.is_authenticated %}
+    <p>Logged in as {{ request.user.username }}</p>
+    {% endif %}
     <nav>
       <a href="{% url 'posts:post_list' %}">Posts</a>
+    </nav>
+    <nav>
+      {% if request.user.is_authenticated %}
+      <a href="{% url 'signout' %}">Sign out</a>
+      {% else %}
+      <a href="{% url 'signup' %}">Sign up</a>
+      <a href="{% url 'signin' %}">Sign in</a>
+      {% endif %}
     </nav>
   </header>
   {% include "messages.html" %}

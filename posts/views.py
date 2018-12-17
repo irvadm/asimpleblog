@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.http import HttpResponse
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from .forms import PostForm
 from .models import Post
@@ -12,7 +13,7 @@ def post_list(request):
 
 
 def post_detail(request, pk):
-    post = Post.objects.get(pk=pk)
+    post = get_object_or_404(Post, pk=pk)
     return render(request, 'posts/post_detail.html', {'post': post})
 
 
@@ -28,7 +29,7 @@ def post_create(request):
 
 
 def post_update(request, pk):
-    post = Post.objects.get(pk=pk)
+    post = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':
         form = PostForm(data=request.POST, instance=post)
         if form.is_valid():
@@ -41,7 +42,7 @@ def post_update(request, pk):
 
 
 def post_delete(request, pk):
-    post = Post.objects.get(pk=pk)
+    post = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':
         post.delete()
         messages.success(request, 'Post successfully deleted!')
