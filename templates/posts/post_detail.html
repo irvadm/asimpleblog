@@ -3,7 +3,8 @@
 
 
 {% block main %}
-<h1>Post Detail</h1>
-<h3>{{ post.title }}</h3>
+<h1>{{ post.title }}</h1>
+<a href="{% url 'posts:post_update' post.pk %}">Edit</a>
+<a href="{% url 'posts:post_delete' post.pk %}">Delete</a>
 <p>{{ post.body }}</p>
 {% endblock %}

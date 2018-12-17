@@ -3,10 +3,19 @@
 
 
 {% block main %}
-<h1>Post List</h1>
-<ul>
-  {% for post in posts %}
-  <li><a href="{% url 'posts:post_detail' post.pk %}">{{ post.title }}</a></li>
-  {% endfor %}
-</ul>
+<h1>Posts</h1>
+<a href="{% url 'posts:post_create' %}">Create Post</a>
+<hr>
+<table>
+  <tbody>
+    {% for post in posts %}
+    <tr>
+      <td><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></td>
+      <td>{{ post.body }}</td>
+      <td><a href="{% url 'posts:post_update' post.pk %}">Edit</a></td>
+      <td><a href="{% url 'posts:post_delete' post.pk %}">Delete</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}
