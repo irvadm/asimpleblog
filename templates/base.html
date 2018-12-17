@@ -7,12 +7,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{% block title %}{% endblock %}</title>
+  <link href="{% static 'css/base.css' %}" rel="stylesheet">
 </head>
 
 <body>
-  <nav>
-    <a href="{% url 'posts:post_list' %}">Posts</a>
-  </nav>
+  <header>
+    <h1>A Very Simple Blog</h1>
+    <nav>
+      <a href="{% url 'posts:post_list' %}">Posts</a>
+    </nav>
+  </header>
   {% include "messages.html" %}
   <main>
     {% block main %}
