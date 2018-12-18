@@ -19,4 +19,17 @@
 
 <hr>
 <h3>Comments</h3>
+<ul class="commentList">
+  {% for comment in post.comments.all %}
+  <li>
+    <p>{{ comment.content }}</p>
+    <small>
+      <span>{{ comment.creator }}</span>
+      <span>&middot;</span>
+      <span>{{ comment.created|timesince }} ago</span>
+
+    </small>
+  </li>
+  {% endfor %}
+</ul>
 {% endblock %}

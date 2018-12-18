@@ -7,3 +7,7 @@
 .messages > .error {
     color: red;
 }
+
+.commentList {
+    list-style: none;
+}
