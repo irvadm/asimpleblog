@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <header class="container">
+  <header class="container-fluid">
     <ul class="topNav">
       <li><a href="{% url 'home' %}">A Simple Blog</a></li>
       <li><a href="{% url 'posts:post_list' %}">Posts</a></li>
@@ -28,7 +28,9 @@
     </ul>
   </header>
 
-  {% include "messages.html" %}
+  <section class="container">
+    {% include "messages.html" %}
+  </section>
 
   <main class="container">
     {% block main %}

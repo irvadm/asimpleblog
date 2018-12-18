@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 from .models import Post
 
 
@@ -25,7 +25,8 @@ def post_create(request):
             new_post = form.save()
             new_post.creator = request.user
             new_post.save()
-            messages.add_message(request, messages.SUCCESS, 'New post successfully created!')
+            messages.add_message(request, messages.SUCCESS,
+                                 'New post successfully created!')
             return redirect(new_post.get_absolute_url())
     form = PostForm()
     return render(request, 'posts/post_create.html', {'form': form})

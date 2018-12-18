@@ -3,33 +3,49 @@
 
 
 {% block main %}
-<h2>{{ post.title }}</h2>
-<small>Submitted by {{ post.creator }}</small>
-<small>Created: {{ post.created }}</small>
-<small>Updated: {{ post.updated }}</small>
 
-{% if post.creator == request.user %}
-<div>
-  <a href="{% url 'posts:post_update' post.pk %}">Edit</a>
-  <a href="{% url 'posts:post_delete' post.pk %}">Delete</a>
+<div class="pageHeader">
+  {% if post.creator == request.user %}
+  <a class="deletePostButton btn btn-danger btn-sm pullRight" href="{% url 'posts:post_delete' post.pk %}">Delete</a>
+  <a class="editPostButton btn btn-warning btn-sm pullRight" href="{% url 'posts:post_update' post.pk %}">Edit</a>
+  {% endif %}
+  <h2 id="title"><a href="">{{ post.title }}</a></h2>
 </div>
-{% endif %}
 
-<p>{{ post.body }}</p>
+<div id="info" class="text-muted">
+  <span>Posted by {{ post.creator }}</span>
+  <span>&middot;</span>
+  <span>{{ post.updated }}</span>
+</div>
 
 <hr>
-<h3>Comments</h3>
-<ul class="commentList">
-  {% for comment in post.comments.all %}
-  <li>
-    <p>{{ comment.content }}</p>
-    <small>
-      <span>{{ comment.creator }}</span>
-      <span>&middot;</span>
-      <span>{{ comment.created|timesince }} ago</span>
 
-    </small>
-  </li>
-  {% endfor %}
-</ul>
+<p id="body">{{ post.body }}</p>
+
+<hr>
+
+<section id="commentSection">
+  <div id="commentHeader">
+    <a class="btn btn-primary btn-sm pullRight" href="">Add Comment</a>
+    <h4>{{ post.comments.all.count }} Comments</h4>
+  </div>
+
+  <ul id="commentList">
+    {% for comment in post.comments.all %}
+    <li class="comment">
+
+      <div>{{ comment.content }}</div>
+      {% if comment.creator == request.user %}
+      <a class="deleteComment pullRight ml-1" href="{% url 'posts:post_delete' post.pk %}">Delete</a>
+      <a class="editComment pullRight" href="{% url 'posts:post_delete' post.pk %}">Edit</a>
+      {% endif %}
+      <div class="commentInfo text-muted">
+        <span>{{ comment.creator }}</span>
+        <span>&middot;</span>
+        <span>{{ comment.created|timesince }} ago</span>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
 {% endblock %}

@@ -17,7 +17,10 @@
       <h3 class="postTitle"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
       <div class="postInfo text-muted">
         <span>{{ post.creator }}</span>
+        <span>&middot;</span>
         <span>{{ post.created }}</span>
+        <span>&middot;</span>
+        <span>{{ post.comments.count }} comments</span>
       </div>
       <div class="postBody">
         <div>{{ post.body|truncatechars:"30" }}</div>
