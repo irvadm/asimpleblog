@@ -17,17 +17,21 @@ def post_detail(request, pk):
     return render(request, 'posts/post_detail.html', {'post': post})
 
 
+@login_required
 def post_create(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
             new_post = form.save()
-            messages.success(request, 'New post successfully created!')
+            new_post.creator = request.user
+            new_post.save()
+            messages.add_message(request, messages.SUCCESS, 'New post successfully created!')
             return redirect(new_post.get_absolute_url())
     form = PostForm()
     return render(request, 'posts/post_create.html', {'form': form})
 
 
+@login_required
 def post_update(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':
@@ -41,6 +45,7 @@ def post_update(request, pk):
         return render(request, 'posts/post_update.html', {'form': form, 'post': post})
 
 
+@login_required
 def post_delete(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':

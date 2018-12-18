@@ -34,19 +34,25 @@ def signup(request):
 def signin(request):
     if request.user.is_authenticated:
         return redirect(reverse('home'))
+
     if request.method == 'POST':
+        redirect_to = request.POST.get('next')
+        logger.info('NEXT PARAM: {}'.format(redirect_to))
         username = request.POST['username']
         password = request.POST['password']
+        logger.info('NEXT PARAM:'.format(request.POST['next']))
         user = authenticate(username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect(reverse('home'))
-        else:
+        if not user:
             messages.add_message(request, messages.ERROR,
                                  'Username or password invalid')
             return render(request, 'auth/signin.html')
+        else:
+            login(request, user)
+            if redirect_to:
+                return redirect(redirect_to)
+            return redirect(reverse('home'))
     else:
-        return render(request, 'auth/signin.html')
+        return render(request, 'auth/signin.html', {'next': request.GET['next']})
 
 
 def signout(request):

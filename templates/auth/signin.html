@@ -7,9 +7,7 @@
 
 <form action="{% url 'signin' %}" method="POST">
   {% csrf_token %}
-
-
-  {{ form.non_field_errors }}
+  <input type="hidden" name="next" value="{{ next}}">
   <table>
     <tr>
       <th><label for="username">Username: </label></th>

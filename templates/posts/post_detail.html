@@ -4,6 +4,9 @@
 
 {% block main %}
 <h1>{{ post.title }}</h1>
+<p>Submitted by {{ post.creator }}</p>
+<p>Created: {{ post.created }}</p>
+<p>Updated: {{ post.updated }}</p>
 <a href="{% url 'posts:post_update' post.pk %}">Edit</a>
 <a href="{% url 'posts:post_delete' post.pk %}">Delete</a>
 <p>{{ post.body }}</p>

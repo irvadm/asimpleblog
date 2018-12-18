@@ -1,3 +1,9 @@
-header {
-    background-color: lightblue;
+.messages {
+    list-style: none;
+}
+.messages > .success {
+    color: green;
+}
+.messages > .error {
+    color: red;
 }
