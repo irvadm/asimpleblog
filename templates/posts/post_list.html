@@ -3,20 +3,27 @@
 
 
 {% block main %}
-<h1>Posts</h1>
-<a href="{% url 'posts:post_create' %}">Create Post</a>
+<div class="pageHeader">
+  <a class="btn btn-primary pullRight" href="{% url 'posts:post_create' %}">Create Post</a>
+  <h1>Posts</h1>
+</div>
+
 <hr>
-<table>
-  <tbody>
-    {% for post in posts %}
-    <tr>
-      <td><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></td>
-      <td>{{ post.creator }}</td>
-      <td>{{ post.body }}</td>
-      <td><a href="{% url 'posts:post_update' post.pk %}">Edit</a></td>
-      <td><a href="{% url 'posts:post_delete' post.pk %}">Delete</a></td>
-    </tr>
-    {% endfor %}
-  </tbody>
+
+<table class="postTable">
+  {% for post in posts %}
+  <tr class="post">
+    <td>
+      <h3 class="postTitle"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+      <div class="postInfo text-muted">
+        <span>{{ post.creator }}</span>
+        <span>{{ post.created }}</span>
+      </div>
+      <div class="postBody">
+        <div>{{ post.body|truncatechars:"30" }}</div>
+      </div>
+    </td>
+  </tr>
+  {% endfor %}
 </table>
 {% endblock %}

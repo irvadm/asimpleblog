@@ -8,5 +8,7 @@ class CommentInline(admin.TabularInline):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['title', 'body']
+    list_display = ['title', 'creator', 'body']
+    list_display_links = ['title']
+    list_editable = ['body']
     inlines = [CommentInline]
