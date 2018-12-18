@@ -3,11 +3,20 @@
 
 
 {% block main %}
-<h1>{{ post.title }}</h1>
-<p>Submitted by {{ post.creator }}</p>
-<p>Created: {{ post.created }}</p>
-<p>Updated: {{ post.updated }}</p>
-<a href="{% url 'posts:post_update' post.pk %}">Edit</a>
-<a href="{% url 'posts:post_delete' post.pk %}">Delete</a>
+<h2>{{ post.title }}</h2>
+<small>Submitted by {{ post.creator }}</small>
+<small>Created: {{ post.created }}</small>
+<small>Updated: {{ post.updated }}</small>
+
+{% if post.creator == request.user %}
+<div>
+  <a href="{% url 'posts:post_update' post.pk %}">Edit</a>
+  <a href="{% url 'posts:post_delete' post.pk %}">Delete</a>
+</div>
+{% endif %}
+
 <p>{{ post.body }}</p>
+
+<hr>
+<h3>Comments</h3>
 {% endblock %}
