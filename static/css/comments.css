@@ -1,0 +1,30 @@
+
+#commentSection {
+    margin: 30px auto;
+}
+
+#commentList {
+    list-style-type: none;
+    padding: 0;
+}
+
+li.comment {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+}
+.commentContent > p {
+    margin: 0;
+}
+.commentInfo {
+    font-size: 0.8em;
+}
+.deleteComment {
+    margin-left: 5px;
+}
+
+#commentForm {
+    margin: 0 auto;
+}
+#commentForm button {
+    margin-top: 5px;
+}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Edit Comment{% endblock %}
+
+
+{% block main %}
+<header class="pageHeader">
+  <h1 class="text-center">Edit Comment</h1>
+</header>
+
+<!-- Comment form section -->
+<form id="commentForm" action="{% url 'posts:comment_update' comment.pk %}" method="POST">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+
+  <!-- Form fields -->
+  {% for field in form %}
+  {{ field.errors }}
+  {{ field }}
+  {{ field.help_text }}
+  {% endfor %}
+  <button class="btn btn-primary" type="submit">Save</button>
+</form>
+
+<hr>
+
+<div class="postContainer">
+  <h4>{{ comment.post.title }}</h4>
+  <div class="postInfo">
+    <span>{{ comment.post.creator }}</span>
+    <span>&middot;</span>
+    <span>{{ comment.post.updated }}</span>
+  </div>
+  <div class="postBody">
+    <p>{{ comment.post.body }}</p>
+  </div>
+</div>
+{% endblock %}

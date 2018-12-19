@@ -1,0 +1,22 @@
+#postList {
+    list-style-type: none;
+    padding: 0;
+}
+.deletePostButton {
+    margin-left: 5px;
+}
+li.post {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+.postTitle {
+    margin: 0;
+}
+.postInfo {
+    font-size: 0.9em;
+}
+.postBody > p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+

@@ -11,22 +11,23 @@
   <link href="{% static 'css/base.css' %}" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400" rel="stylesheet">
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <link href="{% static 'css/messages.css' %}" rel="stylesheet">
+  <link href="{% static 'css/posts.css' %}" rel="stylesheet">
+  <link href="{% static 'css/comments.css' %}" rel="stylesheet">
 </head>
 
 <body>
-  <header class="container-fluid">
-    <ul class="topNav">
-      <li><a href="{% url 'home' %}">A Simple Blog</a></li>
-      <li><a href="{% url 'posts:post_list' %}">Posts</a></li>
-      {% if request.user.is_authenticated %}
-      <li class="right"><a href="{% url 'signout' %}">Sign out</a></li>
-      <li class="right"><a href="">{{ request.user.username }}</a></li>
-      {% else %}
-      <li class="right"><a href="{% url 'signup' %}">Sign up</a></li>
-      <li class="right"><a href="{% url 'signin' %}">Sign in</a></li>
-      {% endif %}
-    </ul>
-  </header>
+  <ul class="topNav">
+    <li><a href="{% url 'home' %}">A Simple Blog</a></li>
+    <li><a href="{% url 'posts:post_list' %}">Posts</a></li>
+    {% if request.user.is_authenticated %}
+    <li class="right"><a href="{% url 'signout' %}">Sign out</a></li>
+    <li class="right"><a href="">{{ request.user.username }}</a></li>
+    {% else %}
+    <li class="right"><a href="{% url 'signup' %}">Sign up</a></li>
+    <li class="right"><a href="{% url 'signin' %}">Sign in</a></li>
+    {% endif %}
+  </ul>
 
   <section class="container">
     {% include "messages.html" %}

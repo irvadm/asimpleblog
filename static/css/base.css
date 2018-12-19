@@ -3,7 +3,8 @@
     font-family: 'Montserrat', sans-serif;
 }
 hr {
-    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 a {
@@ -14,9 +15,7 @@ a:hover {
     text-decoration: none;
     color: #269ccc;
 }
-header.container-fluid {
-    padding: 0;
-}
+
 ul.topNav {
     list-style-type: none;
     margin-bottom: 20px;
@@ -44,24 +43,12 @@ ul.topNav li.right {
     ul.topNav li.right, 
     ul.topNav li { float: none; }
 }
-
-.messages {
-    list-style-type: none;
-    margin-bottom: 20px;
-    padding: 0;
-    overflow: hidden;
-}
-.messages > .success {
-    color: green;
-}
-.messages > .error {
-    color: red;
-}
-
-
+/* --- Page header styles --- */
 .pageHeader h1 {
     font-size: 2.2em;
+    font-weight: 600;
 }
+/* --- Page header styles --- */
 
 .pullRight {
     float: right !important;
@@ -74,54 +61,6 @@ ul.topNav li.right {
     background-color: #1a6d8e;
 }
 
-.postTable {
-    width: 100%;
-}
 
-.post {
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-}
-.postTitle {
-    margin-top: 15px;
-}
-.postInfo {
-    margin-bottom: 20px;
-    font-size: 0.8em;
-}
-.postBody {
-    margin-bottom: 15px;
-}
 
-/* --- Post detail styles --- */
-#title {
-    font-size: 2.5em;
-    margin: 0;
-}
-#body {
-    margin-top: 20px;
-}
-.deletePostButton {
-    margin-left: 5px;
-}
-#commentSection {
-    margin-top: 20px;
-}
-#commentList {
-    list-style-type: none;
-    padding: 0;
-}
-#commentHeader {
-    margin-bottom: 20px;
-}
-.comment {
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-    margin-bottom: 10px;
-}
-.commentInfo {
-    font-size: 0.8em;
-}
-.deleteComment, .editComment {
-    font-size: 0.8em;
-}
 
-/* --- Post detail styles --- */

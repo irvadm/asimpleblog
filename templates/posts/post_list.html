@@ -3,30 +3,31 @@
 
 
 {% block main %}
-<div class="pageHeader">
+<header class="pageHeader">
   <a class="btn btn-primary pullRight" href="{% url 'posts:post_create' %}">Create Post</a>
   <h1>Posts</h1>
-</div>
+</header>
 
 <hr>
 
-<table class="postTable">
+<ul id="postList">
   {% for post in posts %}
-  <tr class="post">
-    <td>
-      <h3 class="postTitle"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
-      <div class="postInfo text-muted">
-        <span>{{ post.creator }}</span>
-        <span>&middot;</span>
-        <span>{{ post.created }}</span>
-        <span>&middot;</span>
-        <span>{{ post.comments.count }} comments</span>
-      </div>
-      <div class="postBody">
-        <div>{{ post.body|truncatechars:"30" }}</div>
-      </div>
-    </td>
-  </tr>
+  <li class="post">
+    <h3 class="postTitle"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+    <div class="postInfo">
+      <span>{{ post.creator }}</span>
+      <span>&middot;</span>
+      <span>{{ post.created }}</span>
+      <span>&middot;</span>
+      <span>{{ post.comments.count }} comments</span>
+    </div>
+    <div class="postBody">
+      <p>{{ post.body|truncatechars:"30" }}</p>
+    </div>
+
+  </li>
   {% endfor %}
-</table>
+</ul>
+
+
 {% endblock %}
