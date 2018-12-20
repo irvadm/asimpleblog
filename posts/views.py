@@ -3,8 +3,12 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-from .forms import PostForm, CommentForm
+from .forms import PostForm
 from .models import Post, Comment
+
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def post_list(request):
@@ -25,8 +29,7 @@ def post_create(request):
             new_post = form.save()
             new_post.creator = request.user
             new_post.save()
-            messages.add_message(request, messages.SUCCESS,
-                                 'New post successfully created!')
+            messages.add_message(request, messages.SUCCESS, 'Post created.')
             return redirect(new_post.get_absolute_url())
     form = PostForm()
     return render(request, 'posts/post_create.html', {'form': form})
@@ -39,7 +42,7 @@ def post_update(request, pk):
         form = PostForm(data=request.POST, instance=post)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Post successfully edited!')
+            messages.add_message(request, messages.SUCCESS, 'Post saved.')
             return redirect(post.get_absolute_url())
     else:
         form = PostForm(instance=post)
@@ -51,7 +54,7 @@ def post_delete(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':
         post.delete()
-        messages.success(request, 'Post successfully deleted!')
+        messages.add_message(request, messages.SUCCESS, 'Post deleted.')
         return redirect(reverse('posts:post_list'))
     else:
         return render(request, 'posts/post_delete.html', {'post': post})
@@ -61,35 +64,30 @@ def post_delete(request, pk):
 def comment_create(request, post_pk):
     post = get_object_or_404(Post, pk=post_pk)
     if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            new_comment = form.save()
-            new_comment.creator = request.user
-            new_comment.post = post
-            new_comment.save()
-            messages.add_message(request, messages.SUCCESS, 'Comment created!')
-            return redirect(post.get_absolute_url())
-        else:
-            messages.add_message(request, messages.ERROR,
-                                 'Problem creating comment.')
-            return render(request, 'posts/comment_create.html', {'form': form})
+        content = request.POST.get('content')
+        new_comment = Comment.objects.create(
+            content=content,
+            creator=request.user,
+            post=post
+        )
+        messages.add_message(request, messages.SUCCESS, 'Comment created.')
+        return redirect(post.get_absolute_url())
     else:
-        form = CommentForm()
-        return render(request, 'posts/comment_create.html', {'form': form, 'post': post})
+        return redirect(post.get_absolute_url())
 
 
 @login_required
 def comment_update(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     if request.method == 'POST':
-        form = CommentForm(data=request.POST, instance=comment)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Comment saved.')
-            return redirect(comment.post.get_absolute_url())
+        content = request.POST.get('content')
+        logger.info('New comment: {}'.format(content))
+        comment.content = content
+        comment.save()
+        messages.add_message(request, messages.SUCCESS, 'Comment saved.')
+        return redirect(comment.post.get_absolute_url())
     else:
-        form = CommentForm(instance=comment)
-        return render(request, 'posts/comment_update.html', {'form': form, 'comment': comment})
+        return render(request, 'posts/comment_update.html', {'comment': comment})
 
 
 @login_required
@@ -97,7 +95,7 @@ def comment_delete(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     if request.method == 'POST':
         comment.delete()
-        messages.success(request, 'Comment deleted.')
+        messages.add_message(request, messages.SUCCESS, 'Comment deleted.')
         return redirect(reverse('posts:post_list'))
     else:
         return render(request, 'posts/comment_delete.html', {'comment': comment})

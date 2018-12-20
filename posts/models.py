@@ -12,6 +12,9 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['-updated']
+
     def __str__(self):
         return self.title
 
@@ -28,5 +31,8 @@ class Comment(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['-updated']
+        
     def __str__(self):
         return '{} - {}'.format(self.content, self.creator.username)

@@ -22,9 +22,10 @@
 <div class="card">
   <h5 class="card-header">Leave a Comment:</h5>
   <div class="card-body">
-    <form>
+    <form action="{% url 'posts:comment_create' post_pk=post.pk %}" method="POST">
+      {% csrf_token %}
       <div class="form-group">
-        <textarea class="form-control" rows="3"></textarea>
+        <textarea class="form-control" name="content" rows="3" required></textarea>
       </div>
       <button class="btn btn-primary" type="submit">Submit</button>
     </form>
@@ -38,6 +39,10 @@
     <div class="media-body">
       <p>{{ comment.content }}</p>
       <small>{{ comment.creator.username }} &middot; {{ comment.updated|timesince }} ago</small>
+      {% if comment.creator == request.user %}
+      <small><a href="{% url 'posts:comment_delete' comment.pk %}" class="float-right ml-1">Delete</a></small>
+      <small><a href="{% url 'posts:comment_update' comment.pk %}" class="float-right">Edit</a></small>
+      {% endif %}
     </div>
   </li>
   {% endfor %}
