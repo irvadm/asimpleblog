@@ -8,12 +8,10 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{% block title %}{% endblock %}</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <link href="{% static 'css/base.css' %}" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400" rel="stylesheet">
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <link href="{% static 'css/base.css' %}" rel="stylesheet">
   <link href="{% static 'css/messages.css' %}" rel="stylesheet">
-  <link href="{% static 'css/posts.css' %}" rel="stylesheet">
-  <link href="{% static 'css/comments.css' %}" rel="stylesheet">
 </head>
 
 <body>
@@ -29,14 +27,35 @@
     {% endif %}
   </ul>
 
-  <section class="container">
-    {% include "messages.html" %}
-  </section>
 
-  <main class="container">
-    {% block main %}
-    {% endblock %}
-  </main>
+
+  <div class="container">
+    <!-- Messages row-->
+    <div class="row">
+      <div class="col">{% include "messages.html" %}</div>
+    </div>
+
+    <!-- Main content row -->
+    <div class="row">
+      <div class="col-md-8">{% block main %}{% endblock %}</div>
+
+      <!-- Right sidebar column -->
+      <div class="col-md-4">
+        <a class="btn btn-info createPostButton" href="{% url 'posts:post_create' %}">Create post</a>
+        <div class="card">
+          <h5 class="card-header">Search</h5>
+          <div class="card-body">
+            <form>
+              <div class="input-group">
+                <input class="form-control" type="text" placeholder="Search for">
+                <button class="btn" type="submit">Go</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 

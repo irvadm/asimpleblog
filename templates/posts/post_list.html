@@ -2,32 +2,23 @@
 {% block title %}Post List{% endblock %}
 
 
+
 {% block main %}
-<header class="pageHeader">
-  <a class="btn btn-primary pullRight" href="{% url 'posts:post_create' %}">Create Post</a>
-  <h1>Posts</h1>
-</header>
 
-<hr>
+<h1>Posts</h1>
 
-<ul id="postList">
-  {% for post in posts %}
-  <li class="post">
-    <h3 class="postTitle"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
-    <div class="postInfo">
-      <span>{{ post.creator }}</span>
-      <span>&middot;</span>
-      <span>{{ post.created }}</span>
-      <span>&middot;</span>
-      <span>{{ post.comments.count }} comments</span>
-    </div>
-    <div class="postBody">
-      <p>{{ post.body|truncatechars:"30" }}</p>
-    </div>
-
-  </li>
-  {% endfor %}
-</ul>
-
+{% for post in posts %}
+<div class="card post">
+  <div class="card-body">
+    <h2 class="card-title">{{ post.title }}</h2>
+    <p class="card-text">{{ post.body|truncatechars:"80" }}</p>
+    <a class="btn btn-primary" href="{{ post.get_absolute_url }}">Read More</a>
+  </div>
+  <div class="card-footer text-muted">
+    Posted at {{ post.updated }} by
+    {{ post.creator.username }}
+  </div>
+</div>
+{% endfor %}
 
 {% endblock %}

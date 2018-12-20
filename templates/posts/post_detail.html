@@ -1,55 +1,46 @@
 {% extends 'base.html' %}
 {% block title %}Post Detail - {{ post.title }}{% endblock %}
 
-
 {% block main %}
-<!-- Post section -->
-<header class="pageHeader">
-  {% if post.creator == request.user %}
-  <a class="deletePostButton btn btn-danger btn-sm pullRight" href="{% url 'posts:post_delete' post.pk %}">Delete</a>
-  <a class="editPostButton btn btn-warning btn-sm pullRight" href="{% url 'posts:post_update' post.pk %}">Edit</a>
-  {% endif %}
-  <h1 class="postTitle">{{ post.title }}</h1>
-</header>
+<!-- Title -->
+<h1>{{ post.title }}</h1>
 
-<div class="postInfo">
-  <span>{{ post.creator }}</span>
-  <span>&middot;</span>
-  <span>{{ post.updated }}</span>
-</div>
+<!-- Author -->
+<p class="lead">by {{ post.creator.username }}</p>
 
 <hr>
 
-<div class="postBody">
-  <p>{{ post.body }}</p>
+<!-- Date/Time -->
+<p>Posted on {{ post.updated.date }} at {{ post.updated.time }}</p>
+
+<!-- Body -->
+<p>{{ post.body }}</p>
+
+<hr>
+
+<!-- Comment form -->
+<div class="card">
+  <h5 class="card-header">Leave a Comment:</h5>
+  <div class="card-body">
+    <form>
+      <div class="form-group">
+        <textarea class="form-control" rows="3"></textarea>
+      </div>
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+  </div>
 </div>
 
-<!-- Comment section -->
-<section id="commentSection">
-  <header class="commentHeader">
-    <a class="btn btn-primary btn-sm pullRight" href="{% url 'posts:comment_create' post_pk=post.pk %}">Add Comment</a>
-    <h4>{{ post.comments.all.count }} Comments</h4>
-  </header>
+<!-- Comments -->
+<ul id="commentList" class="list-unstyled">
+  {% for comment in post.comments.all %}
+  <li class="media comment">
+    <div class="media-body">
+      <p>{{ comment.content }}</p>
+      <small>{{ comment.creator.username }} &middot; {{ comment.updated|timesince }} ago</small>
+    </div>
+  </li>
+  {% endfor %}
 
-  <ul id="commentList">
-    {% for comment in post.comments.all %}
-    <li class="comment">
-      <div class="commentContent">
-        <p>{{ comment.content }}</p>
-      </div>
-
-      <div class="commentInfo">
-        {% if comment.creator == request.user %}
-        <a class="deleteComment pullRight" href="{% url 'posts:comment_delete' comment.pk %}">Delete</a>
-        <a class="editComment pullRight" href="{% url 'posts:comment_update' comment.pk %}">Edit</a>
-        {% endif %}
-        <span>{{ comment.creator }}</span>
-        <span>&middot;</span>
-        <span>{{ comment.created|timesince }} ago</span>
-      </div>
-
-    </li>
-    {% endfor %}
-  </ul>
-</section>
+</ul>
 {% endblock %}

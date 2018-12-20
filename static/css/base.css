@@ -15,7 +15,11 @@ a:hover {
     text-decoration: none;
     color: #269ccc;
 }
+.pullRight {
+    float: right !important;
+}
 
+/* --- Top navbar styles --- */
 ul.topNav {
     list-style-type: none;
     margin-bottom: 20px;
@@ -23,36 +27,26 @@ ul.topNav {
     overflow: hidden;
     background-color: #f8f8f8;
 }
-
 ul.topNav li {
     float: left;
 }
-
 ul.topNav li a {
     display: block;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
 }
-
 ul.topNav li.right {
     float: right;
 }
-
 @media screen and (max-width: 600px) {
     ul.topNav li.right, 
     ul.topNav li { float: none; }
 }
-/* --- Page header styles --- */
-.pageHeader h1 {
-    font-size: 2.2em;
-    font-weight: 600;
-}
-/* --- Page header styles --- */
+/* --- Top navbar styles --- */
 
-.pullRight {
-    float: right !important;
-}
+
+/* --- Button styles --- */
 .btn-primary {
     background-color: #269ccc;
     border-color: #269ccc;
@@ -60,7 +54,34 @@ ul.topNav li.right {
 .btn-primary:hover {
     background-color: #1a6d8e;
 }
+.createPostButton {
+    margin-bottom: 1em;
+}
+/* --- Button styles --- */
 
 
+/* --- Post styles --- */
+.card.post {
+    margin-bottom: 20px;
+}
+/* --- Post styles --- */
 
 
+/* --- Comment styles --- */
+#commentList {
+    margin-top: 20px;
+}
+.comment {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.1)
+}
+.comment p {
+    margin: 0;
+}
+/* --- Comment styles --- */
+
+
+/* --- Form styles --- */
+
+/* --- Form styles --- */
