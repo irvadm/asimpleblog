@@ -8,18 +8,13 @@
 <form action="{% url 'signup' %}" method="POST">
   {% csrf_token %}
   {{ form.non_field_errors }}
-  <table>
-    {% for field in form %}
-    <tr>
-      <th>{{ field.label_tag }}</th>
-      <td>
-        {{ field.errors }}
-        {{ field }}
-        {{ field.help_text }}
-      </td>
-    </tr>
-    {% endfor %}
-  </table>
-  <button type="submit">Create an account</button>
+  {% for field in form %}
+  <div class="form-group">
+    {{ field.label_tag }}
+    {{ field }}
+    <small>{{field.errors}}</small>
+  </div>
+  {% endfor %}
+  <button class="btn btn-primary" type="submit">Create an account</button>
 </form>
 {% endblock %}

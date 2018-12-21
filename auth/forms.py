@@ -4,13 +4,26 @@ from django.core.exceptions import ValidationError
 
 
 class SignUpForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
+    first_name = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+    last_name = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control'})
+    )
     confirm_password = forms.CharField(
-        widget=forms.PasswordInput(), label='Confirm password')
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}), label='Confirm password')
 
     class Meta:
         model = User
-        fields = ['username', 'password']
+        fields = ['first_name', 'last_name', 'username', 'password']
 
     def clean(self):
         super(SignUpForm, self).clean()

@@ -7,16 +7,14 @@
 
 <form action="{% url 'signin' %}" method="POST">
   {% csrf_token %}
-  <table>
-    <tr>
-      <th><label for="username">Username: </label></th>
-      <td><input id="username" type="text" name="username"></td>
-    </tr>
-    <tr>
-      <th><label for="password">Password: </label></th>
-      <td><input id="password" type="password" name="password"></td>
-    </tr>
-  </table>
-  <button type="submit">Sign in</button>
+  <div class="form-group">
+    <label for="username">Username: </label>
+    <input class="form-control" id="username" type="text" name="username">
+  </div>
+  <div class="form-group">
+    <label for="password">Password: </label>
+    <input class="form-control" id="password" type="password" name="password">
+  </div>
+  <button class="btn btn-primary" type="submit">Sign in</button>
 </form>
 {% endblock %}

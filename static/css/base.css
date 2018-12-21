@@ -51,6 +51,15 @@ ul.topNav li.right {
 /* --- Top navbar styles --- */
 
 
+/* --- Error list styles --- */
+.errorlist {
+    list-style-type: none;
+    color: red;
+    padding: 0;
+}
+/* --- Error list styles --- */
+
+
 /* --- Button styles --- */
 .btn-primary {
     background-color: #269ccc;
