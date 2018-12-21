@@ -4,6 +4,7 @@ from .models import Post, Comment
 
 class CommentInline(admin.TabularInline):
     model = Comment
+    list_display = ['pk', 'content', 'creator']
 
 
 @admin.register(Post)

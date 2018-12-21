@@ -50,6 +50,8 @@ def post_create(request):
 @login_required
 def post_update(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    if post.creator != request.user:
+        return render(request, '403.html', {'message': "You cannot edit another user's post."}, status=403)
     if request.method == 'POST':
         form = PostForm(data=request.POST, instance=post)
         if form.is_valid():
@@ -99,6 +101,8 @@ def comment_create(request, post_pk):
 @login_required
 def comment_update(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
+    if comment.creator != request.user:
+        return render(request, '403.html', {'message': "You cannot edit another user's comment."}, status=403)
     if request.method == 'POST':
         content = request.POST.get('content')
         logger.info('New comment: {}'.format(content))

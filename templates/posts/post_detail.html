@@ -39,7 +39,7 @@
   {% for comment in post.comments.all %}
   <li class="media comment">
     <div class="media-body">
-      <p>{{ comment.content }}</p>
+      <p>{{ comment.pk }} - {{ comment.content }}</p>
       <small>{{ comment.creator.username }} &middot; {{ comment.updated|timesince }} ago</small>
       {% if comment.creator == request.user %}
       <small><a href="{% url 'posts:comment_delete' comment.pk %}" class="pullRight ml-1">Delete</a></small>
