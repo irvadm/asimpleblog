@@ -40,12 +40,11 @@
       <p>{{ comment.content }}</p>
       <small>{{ comment.creator.username }} &middot; {{ comment.updated|timesince }} ago</small>
       {% if comment.creator == request.user %}
-      <small><a href="{% url 'posts:comment_delete' comment.pk %}" class="float-right ml-1">Delete</a></small>
-      <small><a href="{% url 'posts:comment_update' comment.pk %}" class="float-right">Edit</a></small>
+      <small><a href="{% url 'posts:comment_delete' comment.pk %}" class="pullRight ml-1">Delete</a></small>
+      <small><a href="{% url 'posts:comment_update' comment.pk %}" class="pullRight">Edit</a></small>
       {% endif %}
     </div>
   </li>
   {% endfor %}
-
 </ul>
 {% endblock %}

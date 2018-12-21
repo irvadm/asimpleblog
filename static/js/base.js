@@ -1,3 +1,4 @@
+// Hide success/error messages.
 setTimeout(function () {
-    $('.messages').fadeOut('fast');
+    $('.message').fadeOut('fast');
 }, 2000);

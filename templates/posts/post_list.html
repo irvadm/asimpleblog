@@ -17,6 +17,7 @@
   <div class="card-footer text-muted">
     Posted at {{ post.updated }} by
     {{ post.creator.username }}
+    <span class="pullRight">{{ post.comments.count }} comments</span>
   </div>
 </div>
 {% endfor %}

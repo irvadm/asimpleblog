@@ -1,8 +1,9 @@
 .messages {
     list-style-type: none;
-    margin-bottom: 20px;
     padding: 0;
     overflow: hidden;
+    min-height: 25px;
+    margin-bottom: 0;
 }
 .messages > .success {
     color: green;

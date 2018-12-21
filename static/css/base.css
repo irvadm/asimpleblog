@@ -27,7 +27,6 @@ a:hover {
 /* --- Top navbar styles --- */
 ul.topNav {
     list-style-type: none;
-    margin-bottom: 20px;
     padding: 0;
     overflow: hidden;
     background-color: #f8f8f8;
