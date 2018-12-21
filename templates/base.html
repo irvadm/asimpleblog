@@ -16,7 +16,7 @@
 
 <body>
   <ul class="topNav">
-    <li><a href="{% url 'home' %}">A Simple Blog</a></li>
+    <li id="logo"><a href="{% url 'home' %}">A Simple Blog</a></li>
     <li><a href="{% url 'posts:post_list' %}">Posts</a></li>
     {% if request.user.is_authenticated %}
     <li class="right"><a href="{% url 'signout' %}">Sign out</a></li>
