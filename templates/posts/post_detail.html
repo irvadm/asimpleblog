@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
-{% block title %}Post Detail - {{ post.title }}{% endblock %}
+{% block title %}{{ post.title }}{% endblock %}
 
 {% block main %}
-<!-- Title -->
-<h1>{{ post.title }}</h1>
 
+<!-- Title -->
+<!-- Edit/Delete post buttons -->
+{% if post.creator == request.user %}
+<a id="deletePostButton" class="btn btn-danger pullRight btn-sm" href="{% url 'posts:post_delete' post.pk %}">Delete</a>
+<a class="btn btn-warning pullRight btn-sm" href="{% url 'posts:post_update' post.pk %}">Edit</a>
+{% endif %}
+<h1 class="mb-0">{{ post.title }}</h1>
 <!-- Author -->
 <p class="lead">by {{ post.creator.username }}</p>
-
 <hr>
-
 <!-- Date/Time -->
 <p>Posted on {{ post.updated.date }} at {{ post.updated.time }}</p>
-
 <!-- Body -->
 <p>{{ post.body }}</p>
 
@@ -27,7 +29,7 @@
       <div class="form-group">
         <textarea class="form-control" name="content" rows="3" required></textarea>
       </div>
-      <button class="btn btn-primary" type="submit">Submit</button>
+      <button class="btn blueButton" type="submit">Submit</button>
     </form>
   </div>
 </div>

@@ -41,14 +41,14 @@
 
       <!-- Right sidebar column -->
       <div class="col-md-4">
-        <a class="btn btn-info createPostButton" href="{% url 'posts:post_create' %}">Create post</a>
+        <a id="createPostButton" class="btn tealButton" href="{% url 'posts:post_create' %}">Create post</a>
         <div class="card">
           <h5 class="card-header">Search</h5>
           <div class="card-body">
             <form action="{% url 'posts:post_search' %}">
               <div class="input-group">
                 <input class="form-control" name="query" type="text" placeholder="Search for...">
-                <button class="btn" type="submit">Go</button>
+                <button class="btn tealButton" type="submit">Go</button>
               </div>
             </form>
           </div>

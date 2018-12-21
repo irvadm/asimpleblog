@@ -4,12 +4,13 @@
 
 {% block main %}
 <h1>Edit Comment</h1>
+
 <!-- Comment form section -->
 <form id="commentForm" action="{% url 'posts:comment_update' comment.pk %}" method="POST">
   {% csrf_token %}
   <div class="form-group">
     <textarea class="form-control" name="content" rows="3" required>{{ comment.content }}</textarea>
   </div>
-  <button class="btn btn-primary" type="submit">Save</button>
+  <button class="btn blueButton" type="submit">Save</button>
 </form>
 {% endblock %}

@@ -60,16 +60,45 @@ ul.topNav li.right {
 /* --- Error list styles --- */
 
 
+/* --- Pagination styles --- */
+.pagination {
+    justify-content: center;
+    margin: 10px 0;
+}
+.pagination a {
+    width: 100px;
+    margin: 0 5px;
+}
+/* --- Pagination styles --- */
+
+
 /* --- Button styles --- */
-.btn-primary {
+.tealButton {
+    background-color: #00b5ad;
+    color: white;
+}
+.tealButton:hover {
+    background-color: #00908a;
+    color: white;
+}
+.blueButton {
     background-color: #269ccc;
     border-color: #269ccc;
+    color: white;
 }
-.btn-primary:hover {
+.blueButton:hover {
     background-color: #1a6d8e;
+    color: white;
 }
-.createPostButton {
+#createPostButton {
     margin-bottom: 1em;
+}
+#deletePostButton {
+    margin-left: 5px;
+}
+.btn.disabled {
+    background-color: #cdcdcd;
+    color: white !important;
 }
 /* --- Button styles --- */
 

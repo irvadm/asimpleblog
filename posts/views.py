@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, Page, PageNotAnInteger, EmptyPage
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, reverse, get_object_or_404, get_list_or_404
@@ -15,7 +16,15 @@ logger = logging.getLogger(__name__)
 
 
 def post_list(request):
-    posts = Post.objects.all()
+    post_qs = Post.objects.all()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(post_qs, 5)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
     return render(request, 'posts/post_list.html', {'posts': posts})
 
 
