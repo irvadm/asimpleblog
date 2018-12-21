@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Post List{% endblock %}
+
+
+
+{% block main %}
+
+<h1>Search results for: {{ query }}</h1>
+
+{% for post in posts %}
+<div class="card post">
+  <div class="card-body">
+    <h2 class="card-title">{{ post.title }}</h2>
+    <p class="card-text">{{ post.body|truncatechars:"80" }}</p>
+    <a class="btn btn-primary" href="{{ post.get_absolute_url }}">Read More</a>
+  </div>
+  <div class="card-footer text-muted">
+    Posted at {{ post.updated }} by
+    {{ post.creator.username }}
+    <span class="pullRight">{{ post.comments.count }} comments</span>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}

@@ -1,7 +1,8 @@
 from django.contrib import messages
-from django.http import HttpResponse
-from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.http import HttpResponse
+from django.shortcuts import render, redirect, reverse, get_object_or_404, get_list_or_404
 
 from .forms import PostForm
 from .models import Post, Comment
@@ -9,6 +10,8 @@ from .models import Post, Comment
 import logging
 
 logger = logging.getLogger(__name__)
+
+# ===== Post views =====
 
 
 def post_list(request):
@@ -60,6 +63,14 @@ def post_delete(request, pk):
         return render(request, 'posts/post_delete.html', {'post': post})
 
 
+def post_search(request):
+    query = request.GET.get('query')
+    posts = get_list_or_404(
+        Post, Q(title__icontains=query) | Q(body__icontains=query))
+    return render(request, 'posts/post_search.html', {'posts': posts, 'query': query})
+
+
+# ===== Comment views =====
 @login_required
 def comment_create(request, post_pk):
     post = get_object_or_404(Post, pk=post_pk)

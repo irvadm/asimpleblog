@@ -45,9 +45,9 @@
         <div class="card">
           <h5 class="card-header">Search</h5>
           <div class="card-body">
-            <form>
+            <form action="{% url 'posts:post_search' %}">
               <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for">
+                <input class="form-control" name="query" type="text" placeholder="Search for...">
                 <button class="btn" type="submit">Go</button>
               </div>
             </form>
