@@ -4,8 +4,28 @@
 
 
 {% block main %}
-
 <h1>Search results for: {{ query }}</h1>
+
+<div class="pagination">
+  <span class="step-links">
+    {% if posts.has_previous %}
+    <a class="btn tealButton btn-sm" href="?page={{ posts.previous_page_number }}">Previous</a>
+    {% else %}
+    <a class="btn btn-sm disabled">Previous</a>
+    {% endif %}
+
+    <!-- Showing the page numbers in Html Page -->
+    <span class="current">
+      Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+    </span>
+
+    {% if posts.has_next %}
+    <a class="btn tealButton btn-sm" href="?page={{ posts.next_page_number }}">Next</a>
+    {% else %}
+    <a class="btn btn-sm disabled">Next</a>
+    {% endif %}
+  </span>
+</div>
 
 {% for post in posts %}
 <div class="card post">
@@ -22,4 +42,24 @@
 </div>
 {% endfor %}
 
+<div class="pagination">
+  <span class="step-links">
+    {% if posts.has_previous %}
+    <a class="btn tealButton btn-sm" href="?page={{ posts.previous_page_number }}">Previous</a>
+    {% else %}
+    <a class="btn btn-sm disabled">Previous</a>
+    {% endif %}
+
+    <!-- Showing the page numbers in Html Page -->
+    <span class="current">
+      Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+    </span>
+
+    {% if posts.has_next %}
+    <a class="btn tealButton btn-sm" href="?page={{ posts.next_page_number }}">Next</a>
+    {% else %}
+    <a class="btn btn-sm disabled">Next</a>
+    {% endif %}
+  </span>
+</div>
 {% endblock %}
