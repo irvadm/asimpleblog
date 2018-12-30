@@ -3,20 +3,30 @@
 
 {% block main %}
 
-<!-- Title -->
 <!-- Edit/Delete post buttons -->
 {% if post.creator == request.user %}
 <a id="deletePostButton" class="btn btn-danger pullRight btn-sm" href="{% url 'posts:post_delete' post.pk %}">Delete</a>
 <a class="btn btn-warning pullRight btn-sm" href="{% url 'posts:post_update' post.pk %}">Edit</a>
 {% endif %}
+
+<!-- Title -->
 <h1 class="mb-0">{{ post.title }}</h1>
+
 <!-- Author -->
 <p class="lead">by {{ post.creator.username }}</p>
+
 <hr>
+
 <!-- Date/Time -->
 <p>Posted on {{ post.updated.date }} at {{ post.updated.time }}</p>
+
+<!-- Image -->
+{% if post.image %}
+<img class="image-responsive postImage" src="{{ post.image }}">
+{% endif %}
+
 <!-- Body -->
-<p>{{ post.body }}</p>
+<p class="postBody">{{ post.body }}</p>
 
 <hr>
 
@@ -39,7 +49,7 @@
   {% for comment in post.comments.all %}
   <li class="media comment">
     <div class="media-body">
-      <p>{{ comment.pk }} - {{ comment.content }}</p>
+      <p class="commentContent">{{ comment.content }}</p>
       <small>{{ comment.creator.username }} &middot; {{ comment.updated|timesince }} ago</small>
       {% if comment.creator == request.user %}
       <small><a href="{% url 'posts:comment_delete' comment.pk %}" class="pullRight ml-1">Delete</a></small>

@@ -15,7 +15,7 @@
 
     <!-- Showing the page numbers in Html Page -->
     <span class="current">
-      Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+      Page {{ posts.number }} of {{ posts.paginator.num_pages }}
     </span>
 
     {% if posts.has_next %}
@@ -29,7 +29,7 @@
 {% for post in posts %}
 <div class="card post">
   <div class="card-body">
-    <h2 class="card-title">{{ post.title }}</h2>
+    <h2 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
     <p class="card-text">{{ post.body|truncatechars:"80" }}</p>
     <a class="btn blueButton" href="{{ post.get_absolute_url }}">Read More</a>
   </div>

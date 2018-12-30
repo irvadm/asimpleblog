@@ -107,6 +107,13 @@ ul.topNav li.right {
 .card.post {
     margin-bottom: 20px;
 }
+.postImage {
+    width: 100%;
+    margin-bottom: 10px;
+}
+.postBody {
+    line-height: 1.5em;
+}
 /* --- Post styles --- */
 
 
@@ -122,6 +129,10 @@ ul.topNav li.right {
 .comment p {
     margin: 0;
 }
+.commentContent {
+    line-height: 1.5em;
+}
+
 /* --- Comment styles --- */
 
 

@@ -9,7 +9,7 @@ class CommentInline(admin.TabularInline):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['pk', 'title', 'creator', 'body']
+    list_display = ['pk', 'title', 'creator', 'body', 'image', ]
     list_display_links = ['pk']
-    list_editable = ['title', 'body']
+    list_editable = ['title', 'body', 'image', ]
     inlines = [CommentInline]

@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 class Post(models.Model):
     title = models.CharField(max_length=50)
+    image = models.URLField(blank=True)
     body = models.TextField(max_length=4000)
     creator = models.ForeignKey(
         User, related_name='posts', on_delete=models.CASCADE, null=True)
@@ -33,6 +34,6 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['-updated']
-        
+
     def __str__(self):
         return '{} - {}'.format(self.content, self.creator.username)
