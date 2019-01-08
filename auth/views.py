@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.utils.http import is_safe_url
 
 from .forms import SignUpForm
 
@@ -36,6 +37,8 @@ def signin(request):
         return redirect(reverse('home'))
 
     if request.method == 'POST':
+        redirect_to = request.POST['next']
+
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
@@ -45,6 +48,9 @@ def signin(request):
             return render(request, 'auth/signin.html')
         else:
             login(request, user)
+            if redirect_to and is_safe_url(redirect_to, allowed_hosts=None):
+                logger.info(f'Redirecting to {redirect_to}')
+                return redirect(redirect_to)
             return redirect(reverse('home'))
     else:
         return render(request, 'auth/signin.html')

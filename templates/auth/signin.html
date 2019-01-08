@@ -8,6 +8,7 @@
 {% block main %}
 <form action="{% url 'signin' %}" method="POST">
   {% csrf_token %}
+  <input type="hidden" name="next" value="{{ request.GET.next }}">
   <div class="form-group">
     <label for="username">Username: </label>
     <input class="form-control" id="username" type="text" name="username" autofocus>

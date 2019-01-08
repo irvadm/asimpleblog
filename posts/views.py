@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 # ===== Post views =====
 def post_list(request):
+    logger.info(f'SESSION: {request.session.items()}')
     post_qs = Post.objects.all()
     page = request.GET.get('page', 1)
     paginator = Paginator(post_qs, 5)

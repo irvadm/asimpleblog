@@ -4,7 +4,7 @@
 {% block header %}
 <!-- Edit/Delete post buttons -->
 {% if post.creator == request.user %}
-<button type="button" class="btn btn-sm btn-danger pull-right ml-1" data-toggle="modal" data-target="#postDeleteModal">Delete</button>
+<button id="openDeletePostModal" type="button" class="btn btn-sm btn-danger pull-right ml-1" data-toggle="modal" data-target="#postDeleteModal">Delete</button>
 <a class="btn btn-warning pull-right btn-sm" href="{% url 'posts:post_update' post.pk %}">Edit</a>
 {% endif %}
 
@@ -18,7 +18,6 @@
 <p class="text-muted mb-0">Posted on {{ post.updated.date }} at {{ post.updated.time }}</p>
 {% endblock %}
 
-
 {% block main %}
 <hr>
 
@@ -30,11 +29,12 @@
 <hr>
 
 <!-- Comment form -->
+{% if request.user.is_authenticated %}
 <div class="card">
   <h5 class="card-header">Leave a Comment:</h5>
   <div class="card-body">
     <form id="commentCreateForm" method="POST">
-      {% csrf_token %}
+      <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
       <input name="postID" value="{{ post.pk }}" hidden>
       <div class="form-group">
         <textarea class="form-control" name="content" rows="3" required></textarea>
@@ -43,7 +43,10 @@
     </form>
   </div>
 </div>
+{% else %}
+<a href="{% url 'signin' %}" class="btn btn-sm teal-button">Sign in to leave a comment</a>
+{% endif %}
 
-<!-- Comments -->
+<!-- Comments list -->
 {% include "includes/comment_list.html" %}
 {% endblock %}
