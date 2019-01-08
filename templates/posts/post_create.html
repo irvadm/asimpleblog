@@ -1,21 +1,25 @@
-{% extends 'base.html' %}
-{% block title %}Post Create{% endblock %}
+{% extends "base.html" %}
 
+{% load markdown_deux_tags %}
+{% load crispy_forms_tags %}
+
+{% block title %}Create Post{% endblock %}
+
+{% block head_extra %}
+{{ form.media }}
+{% endblock %}
+
+{% block header %}
+<h1 class="text-center">Create Post</h1>
+{% endblock %}
 
 {% block main %}
-<h1>Create Post</h1>
-
-<form action="{% url 'posts:post_create' %}" method="POST">
+<form class="postForm" method="POST" action="{% url 'posts:post_create' %}" enctype="multipart/form-data">
   {% csrf_token %}
-  {{ form.non_field_errors }}
-  {% for field in form %}
-  <div class="form-group">
-    {{ field.label_tag }}
-    {{ field }}
-    {{ field.errors }}
-    {{ field.help_text }}
+  {{ form|crispy }}
+
+  <div class="formSubmitButton">
+    <button class="btn btn-lg blue-button" type="submit">Publish</button>
   </div>
-  {% endfor %}
-  <button class="btn blueButton" type="submit">Create</button>
 </form>
 {% endblock %}

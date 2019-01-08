@@ -1,0 +1,11 @@
+<ul id="comment-list" class="list-unstyled">
+  {% for comment in comments %}
+  <li comment-id="{{ comment.pk }}" class="comment" csrf="{{ csrf_token }}">
+    {% if comment.creator == request.user %}
+    <span class="delete-comment pull-right"><i class="far fa-trash-alt"></i></span>
+    {% endif %}
+    <div>{{ comment.content }}</div>
+    <small>{{ comment.creator.username }} &middot; {{ comment.updated|timesince }} ago</small>
+  </li>
+  {% endfor %}
+</ul>

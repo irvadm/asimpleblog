@@ -1,0 +1,20 @@
+<div class="pagination">
+  <span class="step-links">
+    {% if objects.has_previous %}
+    <a class="btn previous-page-button teal-button btn-sm" href="?page={{ objects.previous_page_number }}">Previous</a>
+    {% else %}
+    <a class="btn btn-sm disabled">Previous</a>
+    {% endif %}
+
+    <!-- Showing the page numbers in Html Page -->
+    <span class="current">
+      {{ objects.number }} of {{ objects.paginator.num_pages }}
+    </span>
+
+    {% if objects.has_next %}
+    <a class="btn next-page-button teal-button btn-sm" href="?page={{ objects.next_page_number }}">Next</a>
+    {% else %}
+    <a class="btn btn-sm disabled">Next</a>
+    {% endif %}
+  </span>
+</div>

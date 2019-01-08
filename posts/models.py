@@ -1,15 +1,16 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.shortcuts import reverse
-from django.contrib.auth.models import User
+from django.utils.safestring import mark_safe
+
+from markdown_deux import markdown
 
 
 class Post(models.Model):
     title = models.CharField(max_length=50)
-    image = models.URLField(blank=True)
-    body = models.TextField(max_length=4000)
+    body = models.TextField(max_length=8000)
     creator = models.ForeignKey(
         User, related_name='posts', on_delete=models.CASCADE, null=True)
-
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -21,6 +22,11 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse("posts:post_detail", kwargs={"pk": self.pk})
+
+    def get_markdown(self):
+        body = self.body
+        markdown_text = markdown(body)
+        return mark_safe(markdown_text)
 
 
 class Comment(models.Model):

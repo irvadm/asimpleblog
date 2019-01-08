@@ -1,21 +1,26 @@
-{% extends 'base.html' %}
-{% block title %}Edit Post{% endblock %}
+{% extends "base.html" %}
 
+{% load markdown_deux_tags %}
+{% load crispy_forms_tags %}
+
+{% block title %}Edit {{ post.title }}{% endblock %}
+
+{% block head_extra %}
+{{ form.media }}
+{% endblock %}
+
+{% block header %}
+<h1 class="text-center">Edit Post</h1>
+{% endblock %}
 
 {% block main %}
-<h1>Edit Post</h1>
-
-<form action="{% url 'posts:post_update' post.pk %}" method="POST">
+<!-- Editor -->
+<form id="postForm" method='POST' action="{% url 'posts:post_update' post.pk %}" enctype='multipart/form-data'>
   {% csrf_token %}
-  {{ form.non_field_errors }}
-  {% for field in form %}
-  <div class="form-group">
-    {{ field.label_tag }}
-    {{ field }}
-    {{ field.errors }}
-    {{ field.help_text }}
+  {{ form|crispy }}
+
+  <div class="formSubmitButton">
+    <button class="btn btn-lg blue-button" type="submit">Save</button>
   </div>
-  {% endfor %}
-  <button class="btn blueButton" type="submit">Save</button>
 </form>
 {% endblock %}

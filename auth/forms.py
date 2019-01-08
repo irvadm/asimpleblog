@@ -6,7 +6,8 @@ from django.core.exceptions import ValidationError
 class SignUpForm(forms.ModelForm):
     first_name = forms.CharField(
         required=False,
-        widget=forms.TextInput(attrs={'class': 'form-control'})
+        widget=forms.TextInput(
+            attrs={'class': 'form-control', 'autofocus': True})
     )
     last_name = forms.CharField(
         required=False,

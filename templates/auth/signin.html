@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
 {% block title %}Sign In{% endblock %}
 
+{% block header %}
+<h1 class="text-center">Sign In</h1>
+{% endblock %}
 
 {% block main %}
-<h1>Sign In</h1>
-
 <form action="{% url 'signin' %}" method="POST">
   {% csrf_token %}
   <div class="form-group">
     <label for="username">Username: </label>
-    <input class="form-control" id="username" type="text" name="username">
+    <input class="form-control" id="username" type="text" name="username" autofocus>
   </div>
   <div class="form-group">
     <label for="password">Password: </label>
     <input class="form-control" id="password" type="password" name="password">
   </div>
-  <button class="btn blueButton" type="submit">Sign in</button>
+  <button class="btn btn-lg blue-button" type="submit">Sign in</button>
 </form>
 {% endblock %}

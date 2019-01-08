@@ -1,65 +1,33 @@
 {% extends 'base.html' %}
-{% block title %}Post List{% endblock %}
+{% block title %}{{ query }} - Post Search{% endblock %}
 
-
+{% block header %}
+<a class="btn teal-button pull-right" href="{% url 'posts:post_create' %}">Create Post</a>
+<h1>Search results for: {{ query }}</h1>
+{% endblock %}
 
 {% block main %}
-<h1>Search results for: {{ query }}</h1>
 
-<div class="pagination">
-  <span class="step-links">
-    {% if posts.has_previous %}
-    <a class="btn tealButton btn-sm" href="?page={{ posts.previous_page_number }}">Previous</a>
-    {% else %}
-    <a class="btn btn-sm disabled">Previous</a>
-    {% endif %}
-
-    <!-- Showing the page numbers in Html Page -->
-    <span class="current">
-      Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
-    </span>
-
-    {% if posts.has_next %}
-    <a class="btn tealButton btn-sm" href="?page={{ posts.next_page_number }}">Next</a>
-    {% else %}
-    <a class="btn btn-sm disabled">Next</a>
-    {% endif %}
-  </span>
-</div>
-
+{% if posts %}
+{% include "includes/pagination.html" with objects=posts %}
 {% for post in posts %}
 <div class="card post">
   <div class="card-body">
-    <h2 class="card-title">{{ post.title }}</h2>
-    <p class="card-text">{{ post.body|truncatechars:"80" }}</p>
-    <a class="btn blueButton" href="{{ post.get_absolute_url }}">Read More</a>
+    <h2 class="card-title"><a class="post-title-link" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+    <p class="card-text postBody">{{ post.get_markdown|truncatewords:20 }}</p>
+    <a class="btn blue-button" href="{{ post.get_absolute_url }}">Read More</a>
   </div>
   <div class="card-footer text-muted">
     Posted at {{ post.updated }} by
     {{ post.creator.username }}
-    <span class="pullRight">{{ post.comments.count }} comments</span>
+    <span class="pull-right">{{ post.comments.count }} comments</span>
   </div>
 </div>
 {% endfor %}
+{% include "includes/pagination.html" with objects=posts %}
 
-<div class="pagination">
-  <span class="step-links">
-    {% if posts.has_previous %}
-    <a class="btn tealButton btn-sm" href="?page={{ posts.previous_page_number }}">Previous</a>
-    {% else %}
-    <a class="btn btn-sm disabled">Previous</a>
-    {% endif %}
+{% else %}
+<p class="lead">0 results</p>
+{% endif %}
 
-    <!-- Showing the page numbers in Html Page -->
-    <span class="current">
-      Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
-    </span>
-
-    {% if posts.has_next %}
-    <a class="btn tealButton btn-sm" href="?page={{ posts.next_page_number }}">Next</a>
-    {% else %}
-    <a class="btn btn-sm disabled">Next</a>
-    {% endif %}
-  </span>
-</div>
 {% endblock %}

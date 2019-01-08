@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-sm navbar-light">
+  <a id="logo" class="navbar-brand nav-link" href="{% url 'home' %}">A Simple Blog</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarContent">
+    <ul class="navbar-nav mr-auto">
+      <li><a class="nav-link" href="{% url 'posts:post_list' %}">Posts</a></li>
+    </ul>
+
+    <ul class="navbar-nav mx-auto">
+      <li>
+        <form class="form-inline" method="GET" action="{% url 'posts:post_search' %}">
+          <div class="input-group">
+            <input type="text" class="form-control search-input" name="query" placeholder="Search posts">
+            <button type="submit" class="btn search-button teal-button"><i class="fas fa-search"></i></button>
+          </div>
+        </form>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+      {% if not request.user.is_authenticated %}
+      <li><a class="nav-link" href="{% url 'signup' %}">Sign up</a></li>
+      <li><a class="nav-link" href="{% url 'signin' %}">Sign in</a></li>
+      {% else %}
+      <li><a class="nav-link" href="">{{ request.user.username }}</a></li>
+      <li><a class="nav-link" href="{% url 'signout' %}">Sign out</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>

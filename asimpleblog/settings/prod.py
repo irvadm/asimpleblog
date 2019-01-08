@@ -12,8 +12,6 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 MIDDLEWARE.insert(0, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 AUTH_PASSWORD_VALIDATORS = [

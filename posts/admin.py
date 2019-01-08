@@ -1,4 +1,8 @@
 from django.contrib import admin
+from django.db import models
+
+from pagedown.widgets import AdminPagedownWidget
+
 from .models import Post, Comment
 
 
@@ -9,7 +13,8 @@ class CommentInline(admin.TabularInline):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['pk', 'title', 'creator', 'body', 'image', ]
-    list_display_links = ['pk']
-    list_editable = ['title', 'body', 'image', ]
+    formfield_overrides = {
+        models.TextField: {'widget': AdminPagedownWidget},
+    }
+    list_display = ['title', 'creator', 'body', 'pk']
     inlines = [CommentInline]

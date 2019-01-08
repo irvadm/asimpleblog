@@ -1,13 +1,16 @@
 from django import forms
+
+from markdown_deux.templatetags.markdown_deux_tags import markdown_allowed
+from pagedown.widgets import PagedownWidget
+
 from .models import Post, Comment
 
 
 class PostForm(forms.ModelForm):
-    title = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'form-control'})
-    )
+    title = forms.CharField()
     body = forms.CharField(
-        widget=forms.Textarea(attrs={'class': 'form-control'})
+        widget=PagedownWidget(),
+        help_text=markdown_allowed()
     )
 
     class Meta:
