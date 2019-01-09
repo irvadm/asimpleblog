@@ -1,5 +1,3 @@
-console.log(document.cookie)
-
 // Hide success/error messages.
 setTimeout(function () {
     $('.message').fadeOut('fast');
