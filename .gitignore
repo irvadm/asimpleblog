@@ -5,3 +5,6 @@ venv/
 __pycache__
 notes.md
 *backup*
+Procfile.windows
+pyth.py
+staticfiles

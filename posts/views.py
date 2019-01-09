@@ -36,6 +36,7 @@ def post_detail(request, pk):
 
 @login_required
 def post_create(request):
+    logger.info('post_create()')
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
@@ -43,6 +44,7 @@ def post_create(request):
             new_post.creator = request.user
             new_post.save()
             messages.add_message(request, messages.SUCCESS, 'Post created.')
+            logger.info('successfully created a new post')
             return redirect(new_post.get_absolute_url())
         else:
             messages.add_message(request, messages.ERROR,
