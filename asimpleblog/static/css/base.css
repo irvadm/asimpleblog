@@ -149,3 +149,18 @@ img {
     max-width: 600px;
 }
 /* --- Modal styles --- */
+
+
+/* --- Card styles --- */
+.card-border {
+    border-color: #269ccc;
+}
+/* --- Card styles --- */
+
+
+/* --- User styles --- */
+.profile-picture {
+    max-width: 200px;
+    max-height: 200px;
+}
+/* --- User styles --- */

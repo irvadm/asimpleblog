@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ profile.user.username }}{% endblock %}
+
+{% block header %}
+<!-- Edit/Delete user buttons -->
+{% if user == request.user %}
+{% endif %}
+
+{% endblock %}
+
+{% block main %}
+
+
+
+<div class="row">
+  <!-- Left column -->
+  <div class="col-md-4">
+    <!-- Profile picture -->
+    {% if request.user.profile.picture %}
+    <img src="{{ request.user.profile.picture.url }}" class="profile-picture" alt="Profile picture">
+    {% else %}
+    <img src="{% static 'img/user.svg' %}" class="profile-picture" alt="Profile picture">
+    {% endif %}
+  </div>
+
+  <!-- Right column -->
+  <div class="col-md-8">
+    <a class="btn btn-warning pull-right btn-sm mr-1" href="{% url 'users:settings_profile' %}">Account settings</a>
+    <h4 class="">{{ profile.user.username }}</h4>
+    <p class="">{{ profile.user.first_name }} {{ profile.user.last_name }}</p>
+
+    <hr>
+
+    <h5>Bio</h5>
+    <p>{{ profile.bio }}</p>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold">{{ profile.user.posts.all.count }}</h5>
+            <div class="card-text">Posts</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold">{{ profile.user.comments.all.count }}</h5>
+            <div class="card-text">Comments</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+{% endblock %}

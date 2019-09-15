@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% endblock %}
+
+{% block header %}
+<h1 class="text-center">Edit Picture ({{ request.user.username }})</h1>
+{% endblock %}
+
+
+
+{% block main %}
+<div class="row">
+  <div class="col-md-4 border">
+    {% include "users/includes/settings_menu.html" %}
+  </div>
+  <div class="col-md-8 border">
+    <form action="{% url 'users:settings_upload_picture' %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% if request.user.profile.picture %}
+      <img src="{{ request.user.profile.picture.url }}" class="profile-picture" alt="Profile picture">
+      {% else %}
+      <img src="{% static 'img/user.svg' %}" class="profile-picture" alt="Profile picture">
+      {% endif %}
+      {{ picture_form.as_p }}
+      <!-- <input type="file" name="picture"> -->
+      <button class="btn btn-lg blue-button" type="submit">Save</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

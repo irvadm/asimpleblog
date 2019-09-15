@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}{% endblock %}
+
+{% block header %}
+<h1 class="text-center">Edit Profile ({{ request.user.username }})</h1>
+{% endblock %}
+
+
+
+{% block main %}
+<div class="row">
+  <!-- Left column -->
+  <div class="col-md-4">
+    {% include "users/includes/settings_menu.html" %}
+  </div>
+
+  <!-- Right column -->
+  <div class="col-md-8">
+    <form action="{% url 'users:settings_profile' %}" method="POST">
+      {% csrf_token %}
+      {{ user_form|crispy }}
+      {{ profile_form|crispy }}
+      <button class="btn btn-lg blue-button" type="submit">Save</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

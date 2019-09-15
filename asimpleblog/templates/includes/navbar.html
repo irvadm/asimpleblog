@@ -25,7 +25,7 @@
       <li><a class="nav-link" href="{% url 'signup' %}">Sign up</a></li>
       <li><a class="nav-link" href="{% url 'signin' %}">Sign in</a></li>
       {% else %}
-      <li><a class="nav-link" href="">{{ request.user.username }}</a></li>
+      <li><a class="nav-link" href="{% url 'users:user_detail' username=request.user.username %}">{{ request.user.username }}</a></li>
       <li><a class="nav-link" href="{% url 'signout' %}">Sign out</a></li>
       {% endif %}
     </ul>

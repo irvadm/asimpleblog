@@ -1,0 +1,23 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+dj-database-url = "*"
+django-crispy-forms = "*"
+django-markdown-deux = "*"
+django-pagedown = "*"
+gunicorn = "*"
+markdown2 = "*"
+psycopg2-binary = "*"
+pytz = "*"
+whitenoise = "*"
+Django = "*"
+Markdown = "*"
+Pillow = "*"
+
+[requires]
+python_version = "3.7"

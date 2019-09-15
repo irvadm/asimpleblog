@@ -8,3 +8,9 @@ notes.md
 Procfile.windows
 pyth.py
 staticfiles
+media/
+*.jpg
+*.png
+*.gif
+*.svg
+*.jpeg

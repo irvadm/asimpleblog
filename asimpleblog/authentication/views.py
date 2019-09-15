@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.utils.http import is_safe_url
 
 from .forms import SignUpForm
@@ -17,11 +17,18 @@ def signup(request):
         if not form.is_valid():
             messages.add_message(request, messages.ERROR,
                                  'Problem creating your account.')
-            return render(request, 'auth/signup.html', {'form': form})
+            return render(request, 'authentication/signup.html', {'form': form})
         else:
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-            User.objects.create_user(username=username, password=password)
+            first_name = form.cleaned_data.get('first_name', '')
+            last_name = form.cleaned_data.get('last_name', '')
+            User.objects.create_user(
+                username=username,
+                password=password,
+                first_name=first_name,
+                last_name=last_name
+            )
             user = authenticate(username=username, password=password)
             login(request, user)
             messages.add_message(request, messages.SUCCESS,
@@ -29,7 +36,7 @@ def signup(request):
             return redirect(reverse('home'))
     else:
         form = SignUpForm()
-        return render(request, 'auth/signup.html', {'form': form})
+        return render(request, 'authentication/signup.html', {'form': form})
 
 
 def signin(request):
@@ -45,7 +52,7 @@ def signin(request):
         if not user:
             messages.add_message(request, messages.ERROR,
                                  'Username or password invalid')
-            return render(request, 'auth/signin.html')
+            return render(request, 'authentication/signin.html')
         else:
             login(request, user)
             if redirect_to and is_safe_url(redirect_to, allowed_hosts=None):
@@ -53,7 +60,7 @@ def signin(request):
                 return redirect(redirect_to)
             return redirect(reverse('home'))
     else:
-        return render(request, 'auth/signin.html')
+        return render(request, 'authentication/signin.html')
 
 
 def signout(request):

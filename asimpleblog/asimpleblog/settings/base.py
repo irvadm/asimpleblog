@@ -28,8 +28,10 @@ INSTALLED_APPS = [
     'markdown_deux',
     'pagedown',
     # Local apps
-    'posts',
+    'authentication',
     'core',
+    'posts',
+    'users',
 
 ]
 
@@ -64,6 +66,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'asimpleblog.wsgi.application'
 

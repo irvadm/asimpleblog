@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% load markdown_deux_tags %}
+{% load crispy_forms_tags %}
+
+{% block title %}Edit {{ request.user.username }}{% endblock %}
+
+{% block head_extra %}
+{{ form.media }}
+{% endblock %}
+
+{% block header %}
+<h1 class="text-center">Edit User</h1>
+{% endblock %}
+
+{% block main %}
+<!-- Editor -->
+<form id="profileForm" method='POST' action="{% url 'users:user_update' %}" enctype='multipart/form-data'>
+  {% csrf_token %}
+  {{ user_form|crispy }}
+  {{ profile_form|crispy }}
+  <div class="formSubmitButton">
+    <button class="btn btn-lg blue-button" type="submit">Save</button>
+  </div>
+</form>
+{% endblock %}
